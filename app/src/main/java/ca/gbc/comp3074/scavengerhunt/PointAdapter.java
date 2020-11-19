@@ -1,6 +1,7 @@
 package ca.gbc.comp3074.scavengerhunt;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,17 +46,25 @@ public class PointAdapter extends RecyclerView.Adapter<PointAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        final Point item = itemsList.get(position);
-        holder.text.setText(item.getName());
+        final Point point = itemsList.get(position);
+        holder.text.setText(point.getName());
 
         //set the delete action on button
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //todo: launch view activity from here and pass item
-                Toast.makeText(context, "Clicked \"" + item.getName() + "\"", Toast.LENGTH_LONG).show();
+                openViewPoint(point);
+                //Toast.makeText(context, "Clicked \"" + point.getName() + "\"", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private void openViewPoint(Point point){
+        Intent intent = new Intent(context, ViewPointActivity.class);
+
+        //todo: fix this. this should pass the item ID to the next activity but it does't for some reason
+        intent.putExtra("id", point.getId());
+        context.startActivity(intent);
     }
 
     @Override

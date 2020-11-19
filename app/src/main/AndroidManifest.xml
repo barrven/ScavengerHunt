@@ -12,6 +12,11 @@
         android:theme="@style/AppTheme">
 
         <activity
+            android:name=".ViewPointActivity"
+            android:parentActivityName=".MainActivity"
+            tools:targetApi="jelly_bean" />
+
+        <activity
             android:name=".SearchActivity"
             android:parentActivityName=".MainActivity"
             tools:targetApi="jelly_bean" />
@@ -29,6 +34,7 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
