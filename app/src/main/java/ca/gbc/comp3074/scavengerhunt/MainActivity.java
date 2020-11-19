@@ -30,8 +30,10 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view);
 
         dbHelper = new DatabaseHelper(this);
+        //bootstrapPoints();
         points.addAll(dbHelper.getAllItems());
         adapter = new PointAdapter(this, points, dbHelper); //pass db helper here so items can be deleted with the button
+
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -39,7 +41,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
+    public void bootstrapPoints(){
+        dbHelper.insertItem("Point 1", "123 Fake St. Toronto, ON", "Take a photo", "fun, parks", 4.5);
+    }
 
 
 

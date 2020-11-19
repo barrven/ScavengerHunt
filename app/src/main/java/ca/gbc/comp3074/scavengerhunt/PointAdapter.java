@@ -53,7 +53,7 @@ public class PointAdapter extends RecyclerView.Adapter<PointAdapter.MyViewHolder
             @Override
             public void onClick(View v) {
                 //todo: launch view activity from here and pass item
-                Toast.makeText(context, "Deleted \"" + item.getName() + "\"", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Clicked \"" + item.getName() + "\"", Toast.LENGTH_LONG).show();
             }
         });
     }
