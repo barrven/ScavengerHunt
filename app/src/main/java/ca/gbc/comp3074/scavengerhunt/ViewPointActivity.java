@@ -84,7 +84,7 @@ public class ViewPointActivity extends AppCompatActivity {
                         break;
                 }
             }
-        }
+        };
     }
 
     private void openShowLocation(){
