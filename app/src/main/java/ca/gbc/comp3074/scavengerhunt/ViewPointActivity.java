@@ -66,8 +66,10 @@ public class ViewPointActivity extends AppCompatActivity {
                 return true;
             case R.id.menu_show_location:
                 openShowLocation();
+                return true;
             case R.id.menu_share_w_email:
                 openSendWithEmail();
+                return true;
 
             default:return super.onOptionsItemSelected(item);
         }
