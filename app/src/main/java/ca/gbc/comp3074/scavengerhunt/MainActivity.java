@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void bootstrapPoints(){
-        dbHelper.insertItem("Point 1", "123 Fake St. Toronto, ON", "Take a photo", "fun, parks", 4.5);
+        int rand = new Random().nextInt(1000);
+        dbHelper.insertItem("Point "+rand, "123 Fake St. Toronto, ON", "Take a photo", "fun, parks", 4.5);
     }
 
     //*****menu methods*****
