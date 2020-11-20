@@ -70,11 +70,10 @@ public class ViewPointActivity extends AppCompatActivity {
     }
 
     private void openDelete(){
-
     }
 
     private void openShowLocation(){
-        Intent start = new Intent(getApplicationContext(), MapActivity.class);
+        Intent start = new Intent(getApplicationContext(), MapsActivity.class);
         startActivity(start);
     }
 
