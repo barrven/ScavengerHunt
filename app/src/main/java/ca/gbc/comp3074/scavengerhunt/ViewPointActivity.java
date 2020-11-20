@@ -15,6 +15,7 @@ import android.widget.TextView;
 public class ViewPointActivity extends AppCompatActivity {
 
     private DatabaseHelper dbHelper;
+    private Point point;
 
 
     @Override
@@ -33,7 +34,7 @@ public class ViewPointActivity extends AppCompatActivity {
         String tags = intent.getStringExtra("tags");
         double ratings = 0.0;
         if(intent.getStringExtra("ratings") != null && intent.getStringExtra("ratings").length() > 0){ ratings = Double.parseDouble(intent.getStringExtra("ratings")); }
-        Point point = new Point(id,name,address,task,tags,ratings);
+        point = new Point(id,name,address,task,tags,ratings);
         tv.setText(point.getAddress() + "");
     }
 
@@ -73,8 +74,14 @@ public class ViewPointActivity extends AppCompatActivity {
     }
 
     private void openShowLocation(){
-        Intent start = new Intent(getApplicationContext(), MapsActivity.class);
-        startActivity(start);
+        Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
+        intent.putExtra("id", point.getId() + "");
+        intent.putExtra("name", point.getName() + "");
+        intent.putExtra("address", point.getAddress() + "");
+        intent.putExtra("task", point.getTask() + "");
+        intent.putExtra("tags", point.getTags() + "");
+        intent.putExtra("rating", point.getRating() + "");
+        startActivity(intent);
     }
 
     private void openSendWithEmail(){

@@ -2,6 +2,7 @@ package ca.gbc.comp3074.scavengerhunt;
 
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -14,6 +15,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private Point point;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        // Getting Object from ViewPoint
+        Intent intent = getIntent();
+        int id = Integer.parseInt(intent.getStringExtra("id"));
+        String name = intent.getStringExtra("name");
+        String address = intent.getStringExtra("address");
+        String task = intent.getStringExtra("task");
+        String tags = intent.getStringExtra("tags");
+        double ratings = 0.0;
+        if(intent.getStringExtra("ratings") != null && intent.getStringExtra("ratings").length() > 0){ ratings = Double.parseDouble(intent.getStringExtra("ratings")); }
+        point = new Point(id,name,address,task,tags,ratings);
     }
 
     /**
