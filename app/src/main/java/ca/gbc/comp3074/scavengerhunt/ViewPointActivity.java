@@ -84,6 +84,9 @@ public class ViewPointActivity extends AppCompatActivity {
         i.putExtra(Intent.EXTRA_SUBJECT, "Sharing location");
         String text = "Location name: "+name+"\nAddress: "+address+"\nID: "+id+"\nTask: "+task+"\nTags: "+tags+"\nRatings: "+ratings;
         i.putExtra(Intent.EXTRA_TEXT, text);
+        if(i.resolveActivity(getPackageManager())!= null){
+            startActivity(i);
+        }
     }
 
 }
