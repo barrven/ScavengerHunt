@@ -24,13 +24,6 @@ public class ViewPointActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         TextView tv = findViewById(R.id.tv_id);
-        Button btnViewMap = findViewById(R.id.btnViewMap);
-        btnViewMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
 
         // Getting Object from Point Adapter
         int id = Integer.parseInt(intent.getStringExtra("id"));
@@ -81,7 +74,8 @@ public class ViewPointActivity extends AppCompatActivity {
     }
 
     private void openShowLocation(){
-
+        Intent start = new Intent(getApplicationContext(), MapActivity.class);
+        startActivity(start);
     }
 
     private void openSendWithEmail(){
