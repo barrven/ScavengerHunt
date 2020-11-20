@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class ViewPointActivity extends AppCompatActivity {
@@ -22,7 +24,15 @@ public class ViewPointActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         TextView tv = findViewById(R.id.tv_id);
+        Button btnViewMap = findViewById(R.id.btnViewMap);
+        btnViewMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+            }
+        });
+
+        // Getting Object from Point Adapter
         int id = Integer.parseInt(intent.getStringExtra("id"));
         String name = intent.getStringExtra("name");
         String address = intent.getStringExtra("address");
@@ -32,7 +42,6 @@ public class ViewPointActivity extends AppCompatActivity {
         if(intent.getStringExtra("ratings") != null && intent.getStringExtra("ratings").length() > 0){ ratings = Double.parseDouble(intent.getStringExtra("ratings")); }
         Point point = new Point(id,name,address,task,tags,ratings);
         tv.setText(point.getAddress() + "");
-
     }
 
 
