@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +32,7 @@ public class ViewPointActivity extends AppCompatActivity {
         Intent intent = getIntent();
         TextView tv = findViewById(R.id.tv_id);
 
+        // Getting Object from Point Adapter
         id = Integer.parseInt(intent.getStringExtra("id"));
         name = intent.getStringExtra("name");
         address = intent.getStringExtra("address");
@@ -37,9 +40,8 @@ public class ViewPointActivity extends AppCompatActivity {
         tags = intent.getStringExtra("tags");
         ratings = 0.0;
         if(intent.getStringExtra("ratings") != null && intent.getStringExtra("ratings").length() > 0){ ratings = Double.parseDouble(intent.getStringExtra("ratings")); }
-        Point point = new Point(id,name,address,task,tags,ratings);
+        point = new Point(id,name,address,task,tags,ratings);
         tv.setText(point.getAddress() + "");
-
     }
 
 
@@ -93,7 +95,14 @@ public class ViewPointActivity extends AppCompatActivity {
     }
 
     private void openShowLocation(){
-
+        Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
+        intent.putExtra("id", point.getId() + "");
+        intent.putExtra("name", point.getName() + "");
+        intent.putExtra("address", point.getAddress() + "");
+        intent.putExtra("task", point.getTask() + "");
+        intent.putExtra("tags", point.getTags() + "");
+        intent.putExtra("rating", point.getRating() + "");
+        startActivity(intent);
     }
 
     private void openSendWithEmail(){
