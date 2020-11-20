@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view);
 
         dbHelper = new DatabaseHelper(this);
-        //bootstrapPoints();
+//        bootstrapPoints();
         points.addAll(dbHelper.getAllItems());
         adapter = new PointAdapter(this, points, dbHelper); //pass db helper here so items can be deleted with the button
 

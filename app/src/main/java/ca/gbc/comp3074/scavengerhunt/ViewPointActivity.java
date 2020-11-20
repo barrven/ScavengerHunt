@@ -20,7 +20,8 @@ public class ViewPointActivity extends AppCompatActivity {
         TextView tv = findViewById(R.id.tv_id);
 
         //this is currently null because of the way i'm launching this activity (from the button in the PointAdapter class)
-        tv.setText("String Extra: "+intent.getStringExtra("id"));
+        String id = "String Extra: " + intent.getStringExtra("id");
+        tv.setText(id);
 
 
 
