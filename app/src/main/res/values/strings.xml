@@ -9,4 +9,12 @@
     <string name="menu_share_w_email">Share With Email</string>
     <string name="btn_view">View</string>
     <string name="title_activity_maps">Map</string>
+
+    <!-- Add Point -->
+    <string name="tvAddPointName">Name: </string>
+    <string name="tvAddPointAddress">Address: </string>
+    <string name="tvAddPointTask">Task: </string>
+    <string name="tvAddPointTags">Tags: </string>
+    <string name="tvAddPointRating">Rating: </string>
+    <string name="btnAddPoint">Add Point</string>
 </resources>
