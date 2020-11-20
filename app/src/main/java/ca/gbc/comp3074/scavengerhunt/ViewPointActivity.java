@@ -42,6 +42,7 @@ public class ViewPointActivity extends AppCompatActivity {
         if(intent.getStringExtra("ratings") != null && intent.getStringExtra("ratings").length() > 0){ ratings = Double.parseDouble(intent.getStringExtra("ratings")); }
         point = new Point(id,name,address,task,tags,ratings);
         tv.setText(point.getAddress() + "");
+        dbHelper = new DatabaseHelper(this);
     }
 
 
@@ -82,10 +83,12 @@ public class ViewPointActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 switch (i){
                     case DialogInterface.BUTTON_POSITIVE:
-                        Toast.makeText(getApplicationContext(), "deleted", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Item deleted", Toast.LENGTH_SHORT).show();
+                        dbHelper.deleteItem(point);
+                        finish();
                         break;
                     case DialogInterface.BUTTON_NEGATIVE:
-                        Toast.makeText(getApplicationContext(), "nothing", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "nothing", Toast.LENGTH_SHORT).show();
                         break;
                 }
             }
