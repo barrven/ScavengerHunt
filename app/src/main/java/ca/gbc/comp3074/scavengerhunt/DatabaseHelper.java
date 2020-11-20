@@ -124,7 +124,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         );
     }
 
-    public int deleteNote(Point point){
+    public int deleteItem(Point point){
         SQLiteDatabase db = this.getWritableDatabase();
         int code = db.delete(Point.TABLE_NAME,
                 Point.COLUMN_ID+"=?",
