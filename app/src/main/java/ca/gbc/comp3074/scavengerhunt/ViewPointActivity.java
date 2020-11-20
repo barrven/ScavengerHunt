@@ -1,6 +1,7 @@
 package ca.gbc.comp3074.scavengerhunt;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
@@ -11,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ViewPointActivity extends AppCompatActivity {
 
@@ -18,6 +20,7 @@ public class ViewPointActivity extends AppCompatActivity {
     private String name, address, task, tags;
     private int id;
     private double ratings;
+    private Point point;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,14 +80,16 @@ public class ViewPointActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 switch (i){
                     case DialogInterface.BUTTON_POSITIVE:
-                        //yes
+                        Toast.makeText(getApplicationContext(), "deleted", Toast.LENGTH_SHORT).show();
                         break;
                     case DialogInterface.BUTTON_NEGATIVE:
-                        //no
+                        Toast.makeText(getApplicationContext(), "nothing", Toast.LENGTH_SHORT).show();
                         break;
                 }
             }
         };
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want to delete this point?").setPositiveButton("Delete point", diOnClick).setNegativeButton("No", diOnClick).show();
     }
 
     private void openShowLocation(){
