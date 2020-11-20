@@ -82,7 +82,7 @@ public class ViewPointActivity extends AppCompatActivity {
         Intent i = new Intent(Intent.ACTION_SENDTO);
         i.setData(Uri.parse("mailto:"));
         i.putExtra(Intent.EXTRA_SUBJECT, "Sharing location");
-        String text = "Location name: "+name+"\nAddress: "+address+"\nID: "+id.toString()+"\nTask: "+task+"\nTags: "+tags+"\nRatings: "+ratings.toString();
+        String text = "Location name: "+name+"\nAddress: "+address+"\nID: "+id+"\nTask: "+task+"\nTags: "+tags+"\nRatings: "+ratings;
         i.putExtra(Intent.EXTRA_TEXT, text);
     }
 
