@@ -14,7 +14,9 @@ import android.widget.TextView;
 public class ViewPointActivity extends AppCompatActivity {
 
     private DatabaseHelper dbHelper;
-
+    private String name, address, task, tags;
+    private int id;
+    private double ratings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +26,15 @@ public class ViewPointActivity extends AppCompatActivity {
         Intent intent = getIntent();
         TextView tv = findViewById(R.id.tv_id);
 
-        String id = "String Extra: " + intent.getStringExtra("id");
-        tv.setText(id);
+        id = Integer.parseInt(intent.getStringExtra("id"));
+        name = intent.getStringExtra("name");
+        address = intent.getStringExtra("address");
+        task = intent.getStringExtra("task");
+        tags = intent.getStringExtra("tags");
+        ratings = 0.0;
+        if(intent.getStringExtra("ratings") != null && intent.getStringExtra("ratings").length() > 0){ ratings = Double.parseDouble(intent.getStringExtra("ratings")); }
+        Point point = new Point(id,name,address,task,tags,ratings);
+        tv.setText(point.getAddress() + "");
 
     }
 

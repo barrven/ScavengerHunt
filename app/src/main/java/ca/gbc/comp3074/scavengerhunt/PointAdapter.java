@@ -61,8 +61,12 @@ public class PointAdapter extends RecyclerView.Adapter<PointAdapter.MyViewHolder
 
     private void openViewPoint(Point point){
         Intent intent = new Intent(context, ViewPointActivity.class);
-
         intent.putExtra("id", point.getId() + "");
+        intent.putExtra("name", point.getName() + "");
+        intent.putExtra("address", point.getAddress() + "");
+        intent.putExtra("task", point.getTask() + "");
+        intent.putExtra("tags", point.getTags() + "");
+        intent.putExtra("rating", point.getRating() + "");
         context.startActivity(intent);
     }
 
