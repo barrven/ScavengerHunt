@@ -1,6 +1,7 @@
 package ca.gbc.comp3074.scavengerhunt;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,24 +29,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        System.out.println("Hello!");
+
         recyclerView = findViewById(R.id.recycler_view);
 
         dbHelper = new DatabaseHelper(this);
-        //bootstrapPoints();
+//        bootstrapPoints();
         points.addAll(dbHelper.getAllItems());
         adapter = new PointAdapter(this, points, dbHelper); //pass db helper here so items can be deleted with the button
-
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(adapter);
+
     }
 
 
     public void bootstrapPoints(){
         dbHelper.insertItem("Point 1", "123 Fake St. Toronto, ON", "Take a photo", "fun, parks", 4.5);
     }
-
 
     //*****menu methods*****
     @Override
