@@ -3,5 +3,9 @@
     <string name="menu_add_point">Add Point</string>
     <string name="menu_search">Search</string>
     <string name="menu_about_us">About Us</string>
+    <string name="menu_edit">Edit</string>
+    <string name="menu_delete">Delete</string>
+    <string name="menu_show_location">Show Location</string>
+    <string name="menu_share_w_email">Share With Email</string>
     <string name="btn_view">View</string>
 </resources>

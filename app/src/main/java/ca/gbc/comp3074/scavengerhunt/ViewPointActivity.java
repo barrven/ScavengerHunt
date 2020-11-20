@@ -1,9 +1,13 @@
 package ca.gbc.comp3074.scavengerhunt;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 public class ViewPointActivity extends AppCompatActivity {
@@ -19,12 +23,53 @@ public class ViewPointActivity extends AppCompatActivity {
         Intent intent = getIntent();
         TextView tv = findViewById(R.id.tv_id);
 
-        //this is currently null because of the way i'm launching this activity (from the button in the PointAdapter class)
         String id = "String Extra: " + intent.getStringExtra("id");
         tv.setText(id);
 
+    }
 
 
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inf = getMenuInflater();
+        inf.inflate(R.menu.view_point_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_edit:
+                openMenuEdit();
+                return true;
+            case R.id.menu_delete:
+                openDelete();
+                return true;
+            case R.id.menu_show_location:
+                openShowLocation();
+            case R.id.menu_share_w_email:
+                openSendWithEmail();
+
+            default:return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void openMenuEdit(){
 
     }
+
+    private void openDelete(){
+
+    }
+
+    private void openShowLocation(){
+
+    }
+
+    private void openSendWithEmail(){
+
+    }
+
 }

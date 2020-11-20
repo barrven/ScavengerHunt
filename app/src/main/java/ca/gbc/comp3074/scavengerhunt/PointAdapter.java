@@ -62,7 +62,6 @@ public class PointAdapter extends RecyclerView.Adapter<PointAdapter.MyViewHolder
     private void openViewPoint(Point point){
         Intent intent = new Intent(context, ViewPointActivity.class);
 
-        //todo: fix this. this should pass the item ID to the next activity but it does't for some reason
         intent.putExtra("id", point.getId() + "");
         context.startActivity(intent);
     }
