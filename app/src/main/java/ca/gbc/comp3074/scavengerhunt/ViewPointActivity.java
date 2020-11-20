@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -69,7 +70,11 @@ public class ViewPointActivity extends AppCompatActivity {
     }
 
     private void openSendWithEmail(){
-
+        Intent i = new Intent(Intent.ACTION_SENDTO);
+        i.setData(Uri.parse("mailto:"));
+        i.putExtra(Intent.EXTRA_SUBJECT, "Sharing location");
+        String text = "Location name: "+name+"\nAddress: "+address+"\nID: "+id+"\nTask: "+task+"\nTags: "+tags+"\nRatings: "+ratings;
+        i.putExtra(Intent.EXTRA_TEXT, text);
     }
 
 }
