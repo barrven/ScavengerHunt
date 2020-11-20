@@ -3,6 +3,7 @@ package ca.gbc.comp3074.scavengerhunt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -71,7 +72,19 @@ public class ViewPointActivity extends AppCompatActivity {
     }
 
     private void openDelete(){
-
+        DialogInterface.OnClickListener diOnClick = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                switch (i){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        //yes
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        //no
+                        break;
+                }
+            }
+        }
     }
 
     private void openShowLocation(){
