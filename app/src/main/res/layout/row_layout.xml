@@ -6,14 +6,16 @@
 
     <TextView
         android:id="@+id/tv_item_text"
-        android:layout_width="wrap_content"
+        android:layout_width="90dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/btn_view"
-        android:layout_width="wrap_content"
+        android:layout_width="10dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/btn_view" />
