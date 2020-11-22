@@ -22,40 +22,57 @@ import java.util.List;
 
 public class ViewPointActivity extends AppCompatActivity {
 
-    private DatabaseHelper dbHelper;
-    private String name, address, task, tags;
     private int id;
+    private String name, address, task, tags;
     private double ratings;
+
     private Point point;
     private PointAdapter adapter;
+    private TextView[] outputs;
 
-    //for refreshing list when deleting
+    //for deleting point and refreshing list
     private List<Point> points = new ArrayList<>();
+    private DatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_point);
 
+        // Receive info about object from previous activity
         Intent intent = getIntent();
-        TextView tv = findViewById(R.id.tv_id);
-
-        // Getting Object from Point Adapter
         id = Integer.parseInt(intent.getStringExtra("id"));
         name = intent.getStringExtra("name");
         address = intent.getStringExtra("address");
         task = intent.getStringExtra("task");
         tags = intent.getStringExtra("tags");
         ratings = 0.0;
-        if(intent.getStringExtra("ratings") != null && intent.getStringExtra("ratings").length() > 0){
+
+        if(intent.getStringExtra("ratings") != null &&
+                intent.getStringExtra("ratings").length() > 0){
             ratings = Double.parseDouble(intent.getStringExtra("ratings"));
         }
+
         point = new Point(id,name,address,task,tags,ratings);
-        tv.setText(point.getAddress() + "");
 
         //initialize these for use with clearing list of items on delete
         dbHelper = new DatabaseHelper(this);
         adapter = new PointAdapter(this, points, dbHelper);
+
+        //Get the text views for displaying point details
+        outputs = new TextView[]{
+                findViewById(R.id.tv_point_title),
+                findViewById(R.id.tv_address),
+                findViewById(R.id.tv_task),
+                findViewById(R.id.tv_tags),
+                findViewById(R.id.tv_current_rating)
+        };
+
+        outputs[0].setText(name + " Details");
+        outputs[1].setText(address);
+        outputs[2].setText(task);
+        outputs[3].setText(tags);
+        outputs[4].setText(Double.toString(ratings));
     }
 
 
