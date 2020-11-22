@@ -1,20 +1,20 @@
 package ca.gbc.comp3074.scavengerhunt;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-public class AboutUsActivity extends AppCompatActivity {
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class AddTeamMemberActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about_us);
+        setContentView(R.layout.activity_add_team_member);
     }
 
 
@@ -38,9 +38,9 @@ public class AboutUsActivity extends AppCompatActivity {
     }
 
     private void openAddTeamMember(){
-        Intent start = new Intent(getApplicationContext(), AddTeamMemberActivity.class);
+        Intent start = new Intent(getApplicationContext(), AddPointActivity.class);
         startActivity(start);
     }
 
-
+    
 }

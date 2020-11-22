@@ -31,26 +31,36 @@
             android:value="@string/google_maps_key" />
 
         <activity
+            android:name=".AddTeamMemberActivity"
+            android:parentActivityName=".AboutUsActivity"
+            tools:targetApi="jelly_bean" />
+
+        <activity
             android:name=".MapsActivity"
             android:parentActivityName=".ViewPointActivity"
             android:label="@string/title_activity_maps"
             tools:targetApi="jelly_bean" />
+
         <activity
             android:name=".ViewPointActivity"
             android:parentActivityName=".MainActivity"
             tools:targetApi="jelly_bean" />
+
         <activity
             android:name=".SearchActivity"
             android:parentActivityName=".MainActivity"
             tools:targetApi="jelly_bean" />
+
         <activity
             android:name=".AboutUsActivity"
             android:parentActivityName=".MainActivity"
             tools:targetApi="jelly_bean" />
+
         <activity
             android:name=".AddPointActivity"
             android:parentActivityName=".MainActivity"
             tools:targetApi="jelly_bean" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
