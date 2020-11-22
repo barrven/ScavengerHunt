@@ -17,4 +17,8 @@
     <string name="tvAddPointTags">Tags: </string>
     <string name="tvAddPointRating">Rating: </string>
     <string name="btnAddPoint">Add Point</string>
+
+    <!--maps activity -->
+    <string name="btn_directions">Get Directions</string>
+    <string name="menu_full_screen">View Full Screen</string>
 </resources>

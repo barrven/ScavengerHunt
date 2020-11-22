@@ -32,7 +32,9 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"/>
+            android:parentActivityName=".ViewPointActivity"
+            android:label="@string/title_activity_maps"
+            tools:targetApi="jelly_bean" />
         <activity
             android:name=".ViewPointActivity"
             android:parentActivityName=".MainActivity"
