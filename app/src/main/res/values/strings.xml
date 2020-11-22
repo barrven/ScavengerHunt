@@ -21,4 +21,10 @@
     <!--maps activity -->
     <string name="btn_directions">Get Directions</string>
     <string name="menu_full_screen">View Full Screen</string>
+
+    <!--search activity-->
+        <string-array name="search_choices">
+            <item>Name</item>
+            <item>Tag</item>
+        </string-array>
 </resources>
