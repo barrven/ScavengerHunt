@@ -57,6 +57,11 @@
             tools:targetApi="jelly_bean" />
 
         <activity
+            android:name=".AboutActivity"
+            android:parentActivityName=".MainActivity"
+            tools:targetApi="jelly_bean" />
+
+        <activity
             android:name=".AddPointActivity"
             android:parentActivityName=".MainActivity"
             tools:targetApi="jelly_bean" />
