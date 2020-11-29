@@ -73,8 +73,13 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_search:
                 openSearch();
                 return true;
-            case R.id.menu_about:
+            case R.id.menu_about_us:
                 openAboutUs();
+                return true;
+            case R.id.menu_about:
+                openAbout();
+                return true;
+
 
             default:return super.onOptionsItemSelected(item);
         }
@@ -92,6 +97,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void openAboutUs(){
         Intent start = new Intent(getApplicationContext(), AboutUsActivity.class);
+        startActivity(start);
+    }
+    private void openAbout(){
+        Intent start = new Intent(getApplicationContext(), AboutActivity.class);
         startActivity(start);
     }
 
