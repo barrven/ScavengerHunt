@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ScavengerHunt</string>
+    <string name="app_name">Scavenger Hunt</string>
     <string name="menu_add_point">Add Point</string>
     <string name="menu_search">Search</string>
     <string name="menu_about_us">View Team</string>
