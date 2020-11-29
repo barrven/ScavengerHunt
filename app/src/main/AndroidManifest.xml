@@ -61,7 +61,14 @@
             android:parentActivityName=".MainActivity"
             tools:targetApi="jelly_bean" />
 
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:parentActivityName=".SplashActivity"
+            tools:targetApi="jelly_bean"/>
+
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
