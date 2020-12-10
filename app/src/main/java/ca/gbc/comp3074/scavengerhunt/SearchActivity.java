@@ -2,13 +2,19 @@ package ca.gbc.comp3074.scavengerhunt;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 public class SearchActivity extends AppCompatActivity {
 
     Spinner searchBy;
+    EditText editText;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +23,17 @@ public class SearchActivity extends AppCompatActivity {
 
 
         searchBy = (Spinner) findViewById(R.id.sp_search_by);
+        editText = (EditText) findViewById(R.id.editTextSearch);
+        button = findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), SearchResultActivity.class);
+                String search = editText.getText().toString();
+                i.putExtra("search", search);
+                startActivity(i);
+            }
+        });
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.search_choices, android.R.layout.simple_spinner_item);
@@ -25,6 +42,7 @@ public class SearchActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         searchBy.setAdapter(adapter);
+
 
 
 
