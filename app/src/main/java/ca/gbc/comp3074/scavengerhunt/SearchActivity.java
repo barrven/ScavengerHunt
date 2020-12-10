@@ -30,6 +30,14 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), SearchResultActivity.class);
                 String search = editText.getText().toString();
+                String strtype = searchBy.getSelectedItem().toString();
+                int type;
+                if (strtype.equals("Name")){
+                    type = SearchResultActivity.SEARCH_TYPE_NAME;
+                } else {
+                    type = SearchResultActivity.SEARCH_TYPE_TAGS;
+                }
+                i.putExtra("type", type+"");
                 i.putExtra("search", search);
                 startActivity(i);
             }

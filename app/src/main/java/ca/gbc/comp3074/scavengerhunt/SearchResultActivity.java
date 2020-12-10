@@ -25,6 +25,8 @@ public class SearchResultActivity extends AppCompatActivity {
     private List<Point> points = new ArrayList<>();
     private PointAdapter adapter;
     private RecyclerView recyclerView;
+    public static final int SEARCH_TYPE_NAME = 0;
+    public static final int SEARCH_TYPE_TAGS = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +38,21 @@ public class SearchResultActivity extends AppCompatActivity {
         }
 
         recyclerView = findViewById(R.id.recycler_view);
+        int type = Integer.parseInt(this.getIntent().getStringExtra("type"));
         String search = this.getIntent().getStringExtra("search");
         System.out.println("here:");
         System.out.println(search);
 
         dbHelper = new DatabaseHelper(this);
-        points.addAll(dbHelper.getByTagOrName(search));
+
+        //could easily add new searches this way
+        switch (type){
+            case SEARCH_TYPE_NAME:
+                points.addAll(dbHelper.getByName(search));
+            case SEARCH_TYPE_TAGS:
+                points.addAll(dbHelper.getByTags(search));
+        }
+        System.out.println(points.size());
         adapter = new PointAdapter(this, points, dbHelper); //pass db helper here so items can be deleted with the button
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
