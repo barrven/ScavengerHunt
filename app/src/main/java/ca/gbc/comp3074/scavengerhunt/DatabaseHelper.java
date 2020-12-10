@@ -133,4 +133,45 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return code;
     }
+
+    public List<Point> getByTagOrName(String search){
+        // not a great search. change it to two separate searches eventually?
+        List<Point> points = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                Point.TABLE_NAME,
+                new String[]{
+                        Point.COLUMN_ID,
+                        Point.COLUMN_NAME,
+                        Point.COLUMN_ADDRESS,
+                        Point.COLUMN_TASK,
+                        Point.COLUMN_TAGS,
+                        Point.COLUMN_RATING
+                },
+                Point.COLUMN_NAME+" LIKE ? OR "+Point.COLUMN_TAGS+" LIKE ?",
+                new String[]{search},
+                null, null, null
+        );
+
+        if(cursor != null && cursor.moveToFirst()){
+            do{
+                Point point = new Point(
+                        cursor.getInt(cursor.getColumnIndex(Point.COLUMN_ID)),
+                        cursor.getString(cursor.getColumnIndex(Point.COLUMN_NAME)),
+                        cursor.getString(cursor.getColumnIndex(Point.COLUMN_ADDRESS)),
+                        cursor.getString(cursor.getColumnIndex(Point.COLUMN_TASK)),
+                        cursor.getString(cursor.getColumnIndex(Point.COLUMN_TAGS)),
+                        cursor.getDouble(cursor.getColumnIndex(Point.COLUMN_RATING))
+                );
+
+                points.add(point);
+            }
+            while (cursor.moveToNext());
+
+            cursor.close();
+        }
+        db.close();
+        return points;
+    }
+
 }
