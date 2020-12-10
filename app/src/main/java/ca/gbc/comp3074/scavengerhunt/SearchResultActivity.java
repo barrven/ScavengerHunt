@@ -40,8 +40,6 @@ public class SearchResultActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view);
         int type = Integer.parseInt(this.getIntent().getStringExtra("type"));
         String search = this.getIntent().getStringExtra("search");
-        System.out.println("here:");
-        System.out.println(search);
 
         dbHelper = new DatabaseHelper(this);
 
