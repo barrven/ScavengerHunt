@@ -46,30 +46,38 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        int id;
+        String url, name, address, task, tags;
+        double ratings;
+        Intent intent;
+        Geocoder geocoder;
+
         setContentView(R.layout.map_layout);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+
         // User Location Service
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         // Getting Object from ViewPoint
-        Intent intent = getIntent();
-        int id = Integer.parseInt(intent.getStringExtra("id"));
-        String name = intent.getStringExtra("name");
-        String address = intent.getStringExtra("address");
-        String task = intent.getStringExtra("task");
-        String tags = intent.getStringExtra("tags");
-        double ratings = 0.0;
+        intent = getIntent();
+        id = Integer.parseInt(intent.getStringExtra("id"));
+        name = intent.getStringExtra("name");
+        address = intent.getStringExtra("address");
+        task = intent.getStringExtra("task");
+        tags = intent.getStringExtra("tags");
+        ratings = 0.0;
         if(intent.getStringExtra("ratings") != null && intent.getStringExtra("ratings").length() > 0){
             ratings = Double.parseDouble(intent.getStringExtra("ratings"));
         }
 
         point = new Point(id,name,address,task,tags,ratings);
+        geocoder = new Geocoder(getApplicationContext());
 
-        Geocoder geocoder = new Geocoder(getApplicationContext());
         try {
             addresses = geocoder.getFromLocationName(address, 1);
         } catch (IOException e) {
@@ -129,8 +137,25 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
+    // Directions API
+    private String getUrl(LatLng origin, LatLng dest, String directionMode) {
+        // Origin of route
+        String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
+        // Destination of route
+        String str_dest = "destination=" + dest.latitude + "," + dest.longitude;
+        // Mode
+        String mode = "mode=" + directionMode;
+        // Building the parameters to the web service
+        String parameters = str_origin + "&" + str_dest + "&" + mode;
+        // Output format
+        String output = "json";
+        // Building the url to the web service
+        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=" + getString(R.string.google_maps_key);
+        return url;
+    }
 
-    //menu methods
+
+    // Menu methods
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inf = getMenuInflater();
