@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -13,11 +12,12 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationListener;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -27,6 +27,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
@@ -34,12 +36,17 @@ import com.google.android.gms.tasks.Task;
 import java.io.IOException;
 import java.util.List;
 
+import ca.gbc.comp3074.scavengerhunt.maphelper.FetchURL;
+import ca.gbc.comp3074.scavengerhunt.maphelper.TaskLoadedCallback;
+
 //changed class from extending FragmentActivity to this so that menu bar would show at top
-public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, TaskLoadedCallback {
 
     private GoogleMap mMap;
     private Point point;
     private List<Address> addresses;
+    private Polyline currentPolyline;
+    private MarkerOptions userMarker, pointMarker;
     final private int ACCESS_LOCATION_REQUEST_CODE = 1001;
     FusedLocationProviderClient fusedLocationProviderClient;
 
@@ -58,7 +65,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
 
         // User Location Service
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -84,10 +90,21 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             e.printStackTrace();
         }
 
+        // TODO Test Directions
+
+        Address a = addresses.get(0);
+        userMarker = new MarkerOptions().position(new LatLng(43.642567, -79.387054)).title("User");
+        pointMarker = new MarkerOptions().position(new LatLng(43.651070, -79.347015)).title("Point");
+//        pointMarker = new MarkerOptions().position(new LatLng(a.getLatitude(), a.getLongitude())).title("Point");
+
+        Button getDirections = findViewById(R.id.btn_directions);
+        getDirections.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new FetchURL(MapsActivity.this).execute(getUrl(userMarker.getPosition(), pointMarker.getPosition(), "driving"), "driving");
+            }
+        });
     }
-
-
-
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -107,11 +124,24 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             Address a = addresses.get(0);
             LatLng pos = new LatLng(a.getLatitude(), a.getLongitude());
             if(mMap != null){
-                mMap.addMarker(new MarkerOptions().position(pos).title(point.getName()));
+                pointMarker = new MarkerOptions().position(new LatLng(a.getLatitude(), a.getLongitude())).title("Point");
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(pos, 17));
             }
-
         }
+
+        @SuppressLint("MissingPermission") Task<Location> locationTask = fusedLocationProviderClient.getLastLocation();
+        locationTask.addOnSuccessListener(new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
+                userMarker = new MarkerOptions().position(userLocation).title("User");
+                // Adding User Marker
+                mMap.addMarker(userMarker); // TODO
+            }
+        });
+
+        // Adding Point Marker
+        mMap.addMarker(pointMarker);
     }
 
     private void zoomToUser() {
@@ -123,7 +153,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 15));
             }
         });
-
     }
 
     @Override
@@ -154,6 +183,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         return url;
     }
 
+    @Override
+    public void onTaskDone(Object... values) {
+        if (currentPolyline != null)
+            currentPolyline.remove();
+        currentPolyline = mMap.addPolyline((PolylineOptions) values[0]);
+    }
 
     // Menu methods
     @Override
