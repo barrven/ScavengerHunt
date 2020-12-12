@@ -44,11 +44,6 @@ public class ViewTeamMemberActivity extends AppCompatActivity {
         phone = intent.getStringExtra("phone");
         sms = intent.getStringExtra("sms");
 
-        if(intent.getStringExtra("ratings") != null &&
-                intent.getStringExtra("ratings").length() > 0){
-            ratings = Double.parseDouble(intent.getStringExtra("ratings"));
-        }
-
         teammember = new TeamMember(id,name,email,phone,sms);
 
         //initialize these for use with clearing list of items on delete
@@ -94,7 +89,7 @@ public class ViewTeamMemberActivity extends AppCompatActivity {
 
     private void clearList(){
         teammembers.clear();
-        teammembers.addAll(dbHelper.getAllItems());
+        teammembers.addAll(dbHelper.getAllTeamMembers());
         adapter.notifyDataSetChanged();
     }
 
