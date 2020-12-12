@@ -62,11 +62,6 @@
             tools:targetApi="jelly_bean" />
 
         <activity
-            android:name=".AboutUsActivity"
-            android:parentActivityName=".MainActivity"
-            tools:targetApi="jelly_bean" />
-
-        <activity
             android:name=".AboutActivity"
             android:parentActivityName=".MainActivity"
             tools:targetApi="jelly_bean" />

@@ -1,7 +1,12 @@
 package ca.gbc.comp3074.scavengerhunt;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -23,15 +28,13 @@ public class TeamActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_result);
+        setContentView(R.layout.activity_team);
         if (getSupportActionBar() != null) {
             ActionBar actionBar = getSupportActionBar();
             actionBar.setDisplayHomeAsUpEnabled(false);
         }
 
         recyclerView = findViewById(R.id.recycler_view);
-        int type = Integer.parseInt(this.getIntent().getStringExtra("type"));
-        String search = this.getIntent().getStringExtra("search");
 
         dbHelper = new DatabaseHelper(this);
 
@@ -42,5 +45,29 @@ public class TeamActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(adapter);
 
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inf = getMenuInflater();
+        inf.inflate(R.menu.team_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_add_team_member:
+                openAddTeamMember();
+                return true;
+
+            default:return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void openAddTeamMember(){
+        Intent start = new Intent(getApplicationContext(), AddTeamMemberActivity.class);
+        startActivity(start);
     }
 }

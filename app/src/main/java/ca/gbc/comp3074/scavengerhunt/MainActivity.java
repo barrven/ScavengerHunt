@@ -96,7 +96,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openAboutUs(){
-        Intent start = new Intent(getApplicationContext(), AboutUsActivity.class);
+        //replacing aboutus with team
+        Intent start = new Intent(getApplicationContext(), TeamActivity.class);
         startActivity(start);
     }
     private void openAbout(){
