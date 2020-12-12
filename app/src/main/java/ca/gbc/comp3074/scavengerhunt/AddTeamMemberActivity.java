@@ -62,7 +62,7 @@ public class AddTeamMemberActivity extends AppCompatActivity {
     public void addTeammember(String name, String email, String phone, String sms){
         dbHelper.insertItem(name, email, phone, sms);
         teammembers.clear();
-        teammembers.addAll(dbHelper.getAllItems());
+        teammembers.addAll(dbHelper.getAllTeamMembers());
         adapter.notifyDataSetChanged();
     }
 }
