@@ -58,7 +58,7 @@
 
         <activity
             android:name=".SearchResultActivity"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".SearchActivity"
             tools:targetApi="jelly_bean" />
 
         <activity
