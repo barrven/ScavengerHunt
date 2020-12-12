@@ -138,7 +138,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public List<Point> getByName(String search){
-        // not a great search. change it to two separate searches eventually?
         List<Point> points = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(
@@ -178,7 +177,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public List<Point> getByTags(String search){
-        // not a great search. change it to two separate searches eventually?
         List<Point> points = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(
