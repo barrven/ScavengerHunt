@@ -90,12 +90,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             e.printStackTrace();
         }
 
-        // TODO Test Directions
-
         Address a = addresses.get(0);
         userMarker = new MarkerOptions().position(new LatLng(43.642567, -79.387054)).title("User");
         pointMarker = new MarkerOptions().position(new LatLng(43.651070, -79.347015)).title("Point");
-//        pointMarker = new MarkerOptions().position(new LatLng(a.getLatitude(), a.getLongitude())).title("Point");
 
         Button getDirections = findViewById(R.id.btn_directions);
         getDirections.setOnClickListener(new View.OnClickListener() {
@@ -109,7 +106,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-//        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         // User Location Permission
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -136,7 +132,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
                 userMarker = new MarkerOptions().position(userLocation).title("User");
                 // Adding User Marker
-                mMap.addMarker(userMarker); // TODO
+                mMap.addMarker(userMarker);
             }
         });
 
