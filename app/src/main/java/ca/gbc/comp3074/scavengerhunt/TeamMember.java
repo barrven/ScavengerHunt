@@ -18,8 +18,7 @@ public class TeamMember {
                     +COLUMN_NAME+" TEXT, "
                     +COLUMN_EMAIL+" TEXT, "
                     +COLUMN_PHONE+" TEXT, "
-                    +COLUMN_SMS+" TEXT, "
-                    + " )";
+                    +COLUMN_SMS+" TEXT )";
 
     private int id;
     private String name;
