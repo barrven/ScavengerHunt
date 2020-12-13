@@ -34,12 +34,12 @@ public class TeamActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(false);
         }
 
-        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView = findViewById(R.id.recycler_view2);
 
         dbHelper = new DatabaseHelper(this);
-
-        System.out.println(teammembers.size());
+        teammembers.addAll(dbHelper.getAllTeamMembers());
         adapter = new TeamMemberAdapter(this, teammembers, dbHelper); //pass db helper here so items can be deleted with the button
+        System.out.println("s:"+teammembers.size());
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
