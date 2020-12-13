@@ -111,9 +111,23 @@ public class ViewPointActivity extends AppCompatActivity {
             case R.id.menu_share_w_email:
                 openSendWithEmail();
                 return true;
+            case R.id.menu_share_w_twitter:
+                openSendWithTwitter();
+                return true;
 
             default:return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void openSendWithFacebook() {
+
+    }
+
+    private void openSendWithTwitter() {
+        String twuri = "http://twitter.com/intent/tweet?text=Scavenger hunt point: "+ Uri.encode(name +", "+address+", "+task, "utf-8");
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(twuri));
+        startActivity(i);
     }
 
     private void openMenuEdit(){
