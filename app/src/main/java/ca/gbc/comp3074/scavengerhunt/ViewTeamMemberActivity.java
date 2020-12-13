@@ -58,7 +58,7 @@ public class ViewTeamMemberActivity extends AppCompatActivity {
                 findViewById(R.id.tv_sms)
         };
 
-        outputs[0].setText(name + " Details");
+        outputs[0].setText(name);
         outputs[1].setText(email);
         outputs[2].setText(phone);
         outputs[3].setText(sms);
@@ -71,7 +71,7 @@ public class ViewTeamMemberActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 switch (i){
                     case DialogInterface.BUTTON_POSITIVE:
-                        Toast.makeText(getApplicationContext(), "Item deleted", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Team member deleted", Toast.LENGTH_SHORT).show();
                         dbHelper.deleteItem(teammember);
                         //finish();
                         clearList();
@@ -85,6 +85,23 @@ public class ViewTeamMemberActivity extends AppCompatActivity {
         };
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Are you sure you want to delete this team member?").setPositiveButton("Delete teammember", diOnClick).setNegativeButton("No", diOnClick).show();
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_delete:
+                openDelete();
+                return true;
+
+            default:return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inf = getMenuInflater();
+        inf.inflate(R.menu.view_teammember_menu, menu);
+        return true;
     }
 
     private void clearList(){
