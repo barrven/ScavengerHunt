@@ -13,4 +13,7 @@
     <item
         android:id="@+id/menu_share_w_email"
         android:title="@string/menu_share_w_email" />
+    <item
+        android:id="@+id/menu_share_w_twitter"
+        android:title="Share with Twitter" />
 </menu>
