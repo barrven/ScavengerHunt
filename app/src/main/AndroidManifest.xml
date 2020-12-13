@@ -33,8 +33,8 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".AddTeamMemberActivity"
-            android:parentActivityName=".AboutUsActivity"
+            android:name=".TeamActivity"
+            android:parentActivityName=".MainActivity"
             tools:targetApi="jelly_bean" />
 
         <activity
@@ -49,18 +49,18 @@
             tools:targetApi="jelly_bean" />
 
         <activity
+            android:name=".ViewTeamMemberActivity"
+            android:parentActivityName=".TeamActivity"
+            tools:targetApi="jelly_bean" />
+
+        <activity
             android:name=".SearchActivity"
             android:parentActivityName=".MainActivity"
             tools:targetApi="jelly_bean" />
 
         <activity
             android:name=".SearchResultActivity"
-            android:parentActivityName=".MainActivity"
-            tools:targetApi="jelly_bean" />
-
-        <activity
-            android:name=".AboutUsActivity"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".SearchActivity"
             tools:targetApi="jelly_bean" />
 
         <activity
@@ -71,6 +71,11 @@
         <activity
             android:name=".AddPointActivity"
             android:parentActivityName=".MainActivity"
+            tools:targetApi="jelly_bean" />
+
+        <activity
+            android:name=".AddTeamMemberActivity"
+            android:parentActivityName=".TeamActivity"
             tools:targetApi="jelly_bean" />
 
         <activity

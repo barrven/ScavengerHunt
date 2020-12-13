@@ -22,11 +22,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(Point.CREATE_TABLE);
+        db.execSQL(TeamMember.CREATE_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS "+Point.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS "+TeamMember.TABLE_NAME);
+
         onCreate(db);
     }
 
@@ -135,7 +138,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public List<Point> getByName(String search){
-        // not a great search. change it to two separate searches eventually?
         List<Point> points = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(
@@ -175,7 +177,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public List<Point> getByTags(String search){
-        // not a great search. change it to two separate searches eventually?
         List<Point> points = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(
@@ -213,5 +214,106 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return points;
     }
+
+    ////----------------team methods-------------///
+    public long insertItem(String name, String email, String phone, String sms){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(TeamMember.COLUMN_NAME, name);
+        values.put(TeamMember.COLUMN_EMAIL, email);
+        values.put(TeamMember.COLUMN_PHONE, phone);
+        values.put(TeamMember.COLUMN_SMS, sms);
+        long id = db.insert(TeamMember.TABLE_NAME, null, values);
+        db.close();
+
+        return id;
+    }
+
+    public TeamMember getTeamMember(long id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                TeamMember.TABLE_NAME,
+                new String[]{
+                        TeamMember.COLUMN_ID,
+                        TeamMember.COLUMN_NAME,
+                        TeamMember.COLUMN_EMAIL,
+                        TeamMember.COLUMN_PHONE,
+                        TeamMember.COLUMN_SMS
+                },
+                TeamMember.COLUMN_ID+"=?",
+                new String[]{String.valueOf(id)},
+                null, null, null
+        );
+
+        TeamMember teammember = null;
+
+        if(cursor != null && cursor.moveToFirst()){
+
+            teammember = new TeamMember(
+                    cursor.getInt(cursor.getColumnIndex(TeamMember.COLUMN_ID)),
+                    cursor.getString(cursor.getColumnIndex(TeamMember.COLUMN_NAME)),
+                    cursor.getString(cursor.getColumnIndex(TeamMember.COLUMN_EMAIL)),
+                    cursor.getString(cursor.getColumnIndex(TeamMember.COLUMN_PHONE)),
+                    cursor.getString(cursor.getColumnIndex(TeamMember.COLUMN_SMS))
+            );
+
+            cursor.close();
+        }
+        db.close();
+        return teammember;
+    }
+
+    public List<TeamMember> getAllTeamMembers(){
+        List<TeamMember> teammembers = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT * FROM "+TeamMember.TABLE_NAME;
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if(cursor != null && cursor.moveToFirst()){
+            do{
+                TeamMember teammember = new TeamMember(
+                        cursor.getInt(cursor.getColumnIndex(TeamMember.COLUMN_ID)),
+                        cursor.getString(cursor.getColumnIndex(TeamMember.COLUMN_NAME)),
+                        cursor.getString(cursor.getColumnIndex(TeamMember.COLUMN_EMAIL)),
+                        cursor.getString(cursor.getColumnIndex(TeamMember.COLUMN_PHONE)),
+                        cursor.getString(cursor.getColumnIndex(TeamMember.COLUMN_SMS))
+                );
+
+                teammembers.add(teammember);
+            }
+            while (cursor.moveToNext());
+
+            cursor.close();
+        }
+
+        db.close();
+        return teammembers;
+    }
+
+    public int updateItem(TeamMember teammember){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(TeamMember.COLUMN_NAME, teammember.getName());
+        values.put(TeamMember.COLUMN_EMAIL, teammember.getEmail());
+        values.put(TeamMember.COLUMN_PHONE, teammember.getPhone());
+        values.put(TeamMember.COLUMN_SMS, teammember.getSms());
+        return db.update(
+                TeamMember.TABLE_NAME,
+                values,
+                TeamMember.COLUMN_ID+"=?",
+                new String[]{String.valueOf(teammember.getId())}
+        );
+    }
+
+    public int deleteItem(TeamMember teammember){
+        SQLiteDatabase db = this.getWritableDatabase();
+        int code = db.delete(TeamMember.TABLE_NAME,
+                TeamMember.COLUMN_ID+"=?",
+                new String[]{String.valueOf(teammember.getId())}
+        );
+        db.close();
+        return code;
+    }
+
 
 }
