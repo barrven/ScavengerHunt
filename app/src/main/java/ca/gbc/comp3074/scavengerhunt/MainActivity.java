@@ -35,8 +35,6 @@ public class MainActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(false);
         }
 
-        System.out.println("Hello!");
-
         recyclerView = findViewById(R.id.recycler_view);
 
         dbHelper = new DatabaseHelper(this);

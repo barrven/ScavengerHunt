@@ -38,6 +38,11 @@
             tools:targetApi="jelly_bean" />
 
         <activity
+            android:name=".FullScreenMapsActivity"
+            android:label="@string/title_activity_maps"
+            tools:targetApi="jelly_bean" />
+
+        <activity
             android:name=".MapsActivity"
             android:parentActivityName=".ViewPointActivity"
             android:label="@string/title_activity_maps"

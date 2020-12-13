@@ -196,7 +196,26 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        return super.onOptionsItemSelected(item);
+
+        switch (item.getItemId()) {
+            case R.id.menu_full_screen:
+                openFullScreen();
+                return true;
+
+            default: return super.onOptionsItemSelected(item);
+        }
+
+    }
+
+    private void openFullScreen(){
+        Intent intent = new Intent(getApplicationContext(), FullScreenMapsActivity.class);
+        intent.putExtra("id", point.getId() + "");
+        intent.putExtra("name", point.getName() + "");
+        intent.putExtra("address", point.getAddress() + "");
+        intent.putExtra("task", point.getTask() + "");
+        intent.putExtra("tags", point.getTags() + "");
+        intent.putExtra("rating", point.getRating() + "");
+        startActivity(intent);
     }
 
 
