@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -12,8 +11,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +22,7 @@ public class ViewPointActivity extends AppCompatActivity {
 
     private int id;
     private String name, address, task, tags;
-    private double ratings;
+    private double rating;
 
     private Point point;
     private PointAdapter adapter;
@@ -33,6 +31,8 @@ public class ViewPointActivity extends AppCompatActivity {
     //for deleting point and refreshing list
     private List<Point> points = new ArrayList<>();
     private DatabaseHelper dbHelper;
+
+    private RatingBar ratingBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +46,13 @@ public class ViewPointActivity extends AppCompatActivity {
         address = intent.getStringExtra("address");
         task = intent.getStringExtra("task");
         tags = intent.getStringExtra("tags");
-        ratings = 0.0;
-
-        if(intent.getStringExtra("ratings") != null &&
-                intent.getStringExtra("ratings").length() > 0){
-            ratings = Double.parseDouble(intent.getStringExtra("ratings"));
+        rating = 0;
+        if(intent.getStringExtra("rating") != null
+                && intent.getStringExtra("rating").length() > 0){
+            rating = Double.parseDouble(intent.getStringExtra("rating"));
         }
 
-        point = new Point(id,name,address,task,tags,ratings);
+        point = new Point(id,name,address,task,tags, rating);
 
         //initialize these for use with clearing list of items on delete
         dbHelper = new DatabaseHelper(this);
@@ -72,7 +71,19 @@ public class ViewPointActivity extends AppCompatActivity {
         outputs[1].setText(address);
         outputs[2].setText(task);
         outputs[3].setText(tags);
-        outputs[4].setText(Double.toString(ratings));
+        outputs[4].setText(Double.toString(rating));
+
+        //manipulate the rating bar
+        ratingBar = findViewById(R.id.ratingBar);
+        ratingBar.setRating((float) rating);
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                point.setRating(rating);
+                dbHelper.updateItem(point);
+                outputs[4].setText(Double.toString(point.getRating()));
+            }
+        });
     }
 
 
@@ -106,7 +117,7 @@ public class ViewPointActivity extends AppCompatActivity {
     }
 
     private void openMenuEdit(){
-
+        // todo: add an edit point activity
     }
 
     private void openDelete(){
@@ -117,7 +128,6 @@ public class ViewPointActivity extends AppCompatActivity {
                     case DialogInterface.BUTTON_POSITIVE:
                         Toast.makeText(getApplicationContext(), "Item deleted", Toast.LENGTH_SHORT).show();
                         dbHelper.deleteItem(point);
-                        //finish();
                         clearList();
                         backToView();
                         break;
@@ -157,7 +167,7 @@ public class ViewPointActivity extends AppCompatActivity {
         Intent i = new Intent(Intent.ACTION_SENDTO);
         i.setData(Uri.parse("mailto:"));
         i.putExtra(Intent.EXTRA_SUBJECT, "Sharing location");
-        String text = "Location name: "+name+"\nAddress: "+address+"\nID: "+id+"\nTask: "+task+"\nTags: "+tags+"\nRatings: "+ratings;
+        String text = "Location name: "+name+"\nAddress: "+address+"\nID: "+id+"\nTask: "+task+"\nTags: "+tags+"\nRatings: "+ rating;
         i.putExtra(Intent.EXTRA_TEXT, text);
         if(i.resolveActivity(getPackageManager())!= null){
             startActivity(i);
