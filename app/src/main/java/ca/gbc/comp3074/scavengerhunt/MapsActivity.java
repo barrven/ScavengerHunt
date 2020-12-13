@@ -18,6 +18,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -99,6 +100,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onClick(View view) {
                 new FetchURL(MapsActivity.this).execute(getUrl(userMarker.getPosition(), pointMarker.getPosition(), "driving"), "driving");
+                Toast.makeText(getApplicationContext(), "Unable to load directions without billing enabled", Toast.LENGTH_LONG).show();
             }
         });
     }
