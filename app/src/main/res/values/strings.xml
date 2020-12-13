@@ -25,6 +25,11 @@
     <!--maps activity -->
     <string name="btn_directions">Get Directions</string>
     <string name="menu_full_screen">View Full Screen</string>
+    <string name="tv_team_member_name">Name</string>
+    <string name="tv_team_member_email_label">Email</string>
+    <string name="tv_team_member_phone_label">Phone</string>
+    <string name="tv_team_member_sms_label">SMS</string>
+    <string name="btn_edit_team_member">Edit Team Member</string>
 
     <!--search activity-->
         <string-array name="search_choices">
