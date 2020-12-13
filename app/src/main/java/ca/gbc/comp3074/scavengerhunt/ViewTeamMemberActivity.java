@@ -111,8 +111,8 @@ public class ViewTeamMemberActivity extends AppCompatActivity {
     }
 
     private void backToView(){
-        Intent backToMain = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(backToMain);
+        Intent intent = new Intent(getApplicationContext(), TeamActivity.class);
+        startActivity(intent);
     }
 
 }
