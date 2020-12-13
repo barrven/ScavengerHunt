@@ -194,6 +194,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         return true;
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
@@ -201,10 +202,19 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             case R.id.menu_full_screen:
                 openFullScreen();
                 return true;
+            case android.R.id.home:
+                onBackPressed();
+                return true;
 
             default: return super.onOptionsItemSelected(item);
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 
     private void openFullScreen(){
