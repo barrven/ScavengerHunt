@@ -19,6 +19,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.gbc.comp3074.scavengerhunt.adapters.TeamMemberAdapter;
+import ca.gbc.comp3074.scavengerhunt.entities.TeamMember;
+import ca.gbc.comp3074.scavengerhunt.helpers.DatabaseHelper;
+
 public class ViewTeamMemberActivity extends AppCompatActivity {
 
     private TeamMember teammember;

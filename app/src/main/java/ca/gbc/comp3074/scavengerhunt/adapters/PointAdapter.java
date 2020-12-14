@@ -1,4 +1,4 @@
-package ca.gbc.comp3074.scavengerhunt;
+package ca.gbc.comp3074.scavengerhunt.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,12 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+
+import ca.gbc.comp3074.scavengerhunt.R;
+import ca.gbc.comp3074.scavengerhunt.ViewPointActivity;
+import ca.gbc.comp3074.scavengerhunt.entities.Point;
+import ca.gbc.comp3074.scavengerhunt.helpers.DatabaseHelper;
 
 public class PointAdapter extends RecyclerView.Adapter<PointAdapter.MyViewHolder> {
 

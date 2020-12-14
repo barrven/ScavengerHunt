@@ -1,4 +1,4 @@
-package ca.gbc.comp3074.scavengerhunt;
+package ca.gbc.comp3074.scavengerhunt.entities;
 
 import java.util.ArrayList;
 import java.util.Arrays;

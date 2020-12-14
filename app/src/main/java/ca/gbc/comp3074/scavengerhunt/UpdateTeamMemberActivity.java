@@ -2,7 +2,6 @@ package ca.gbc.comp3074.scavengerhunt;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +12,10 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import ca.gbc.comp3074.scavengerhunt.adapters.TeamMemberAdapter;
+import ca.gbc.comp3074.scavengerhunt.entities.TeamMember;
+import ca.gbc.comp3074.scavengerhunt.helpers.DatabaseHelper;
 
 public class UpdateTeamMemberActivity extends AppCompatActivity {
 

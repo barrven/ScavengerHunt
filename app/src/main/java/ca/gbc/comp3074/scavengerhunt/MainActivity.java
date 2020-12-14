@@ -1,7 +1,6 @@
 package ca.gbc.comp3074.scavengerhunt;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -13,11 +12,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import ca.gbc.comp3074.scavengerhunt.adapters.PointAdapter;
+import ca.gbc.comp3074.scavengerhunt.entities.Point;
+import ca.gbc.comp3074.scavengerhunt.helpers.DatabaseHelper;
 
 public class MainActivity extends AppCompatActivity {
 

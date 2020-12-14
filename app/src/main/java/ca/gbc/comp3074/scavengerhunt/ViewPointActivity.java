@@ -18,6 +18,10 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.gbc.comp3074.scavengerhunt.adapters.PointAdapter;
+import ca.gbc.comp3074.scavengerhunt.entities.Point;
+import ca.gbc.comp3074.scavengerhunt.helpers.DatabaseHelper;
+
 public class ViewPointActivity extends AppCompatActivity {
 
     private int id;

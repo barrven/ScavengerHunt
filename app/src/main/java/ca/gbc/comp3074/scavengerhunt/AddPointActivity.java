@@ -12,6 +12,10 @@ import android.widget.EditText;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.gbc.comp3074.scavengerhunt.adapters.PointAdapter;
+import ca.gbc.comp3074.scavengerhunt.entities.Point;
+import ca.gbc.comp3074.scavengerhunt.helpers.DatabaseHelper;
+
 public class AddPointActivity extends AppCompatActivity {
 
     private DatabaseHelper dbHelper = new DatabaseHelper(this);

@@ -37,6 +37,7 @@ import com.google.android.gms.tasks.Task;
 import java.io.IOException;
 import java.util.List;
 
+import ca.gbc.comp3074.scavengerhunt.entities.Point;
 import ca.gbc.comp3074.scavengerhunt.maphelper.FetchURL;
 import ca.gbc.comp3074.scavengerhunt.maphelper.TaskLoadedCallback;
 

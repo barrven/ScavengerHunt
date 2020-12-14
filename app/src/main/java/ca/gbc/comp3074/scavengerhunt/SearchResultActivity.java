@@ -1,6 +1,5 @@
 package ca.gbc.comp3074.scavengerhunt;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.ActionBar;
@@ -12,10 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import ca.gbc.comp3074.scavengerhunt.DatabaseHelper;
-import ca.gbc.comp3074.scavengerhunt.Point;
-import ca.gbc.comp3074.scavengerhunt.PointAdapter;
-import ca.gbc.comp3074.scavengerhunt.R;
+import ca.gbc.comp3074.scavengerhunt.adapters.PointAdapter;
+import ca.gbc.comp3074.scavengerhunt.entities.Point;
+import ca.gbc.comp3074.scavengerhunt.helpers.DatabaseHelper;
 
 public class SearchResultActivity extends AppCompatActivity {
     //basically a copy/paste of mainactivity

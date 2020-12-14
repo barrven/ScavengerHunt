@@ -1,4 +1,4 @@
-package ca.gbc.comp3074.scavengerhunt;
+package ca.gbc.comp3074.scavengerhunt.helpers;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -10,6 +10,9 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import ca.gbc.comp3074.scavengerhunt.entities.Point;
+import ca.gbc.comp3074.scavengerhunt.entities.TeamMember;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;

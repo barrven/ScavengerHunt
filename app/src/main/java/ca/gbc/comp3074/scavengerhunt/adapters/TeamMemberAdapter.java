@@ -1,4 +1,4 @@
-package ca.gbc.comp3074.scavengerhunt;
+package ca.gbc.comp3074.scavengerhunt.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+
+import ca.gbc.comp3074.scavengerhunt.R;
+import ca.gbc.comp3074.scavengerhunt.ViewTeamMemberActivity;
+import ca.gbc.comp3074.scavengerhunt.entities.TeamMember;
+import ca.gbc.comp3074.scavengerhunt.helpers.DatabaseHelper;
 
 public class TeamMemberAdapter extends RecyclerView.Adapter<TeamMemberAdapter.MyViewHolder> {
 
