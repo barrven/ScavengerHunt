@@ -48,11 +48,7 @@ public class ViewTeamMemberActivity extends AppCompatActivity {
                 findViewById(R.id.tv_sms)
         };
 
-        outputs[0].setText(teammember.getName());
-        outputs[1].setText(teammember.getEmail());
-        outputs[2].setText(teammember.getPhone());
-        outputs[3].setText(teammember.getSms());
-
+        refreshOutputs();
 
         Button btnEditTeamMember = findViewById(R.id.btn_edit_team_member);
         btnEditTeamMember.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +57,21 @@ public class ViewTeamMemberActivity extends AppCompatActivity {
                 openUpdate(addTeamMemberToIntent(teammember));
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        teammember = dbHelper.getTeamMember(teammember.getId());
+        refreshOutputs();
+
+    }
+
+    private void refreshOutputs(){
+        outputs[0].setText(teammember.getName());
+        outputs[1].setText(teammember.getEmail());
+        outputs[2].setText(teammember.getPhone());
+        outputs[3].setText(teammember.getSms());
     }
 
     private TeamMember getTeammemberFromIntent(Intent intent){
