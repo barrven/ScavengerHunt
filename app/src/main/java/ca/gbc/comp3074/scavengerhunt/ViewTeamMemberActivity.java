@@ -76,7 +76,6 @@ public class ViewTeamMemberActivity extends AppCompatActivity {
         super.onResume();
         teammember = dbHelper.getTeamMember(teammember.getId());
         refreshOutputs();
-
     }
 
     private void refreshOutputs(){

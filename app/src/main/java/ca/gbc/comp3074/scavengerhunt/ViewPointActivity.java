@@ -24,10 +24,6 @@ import ca.gbc.comp3074.scavengerhunt.helpers.DatabaseHelper;
 
 public class ViewPointActivity extends AppCompatActivity {
 
-    private int id;
-    private String name, address, task, tags;
-    private double rating;
-
     private Point point;
     private PointAdapter adapter;
     private TextView[] outputs;
@@ -44,19 +40,7 @@ public class ViewPointActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_point);
 
         // Receive info about object from previous activity
-        Intent intent = getIntent();
-        id = Integer.parseInt(intent.getStringExtra("id"));
-        name = intent.getStringExtra("name");
-        address = intent.getStringExtra("address");
-        task = intent.getStringExtra("task");
-        tags = intent.getStringExtra("tags");
-        rating = 0;
-        if(intent.getStringExtra("rating") != null
-                && intent.getStringExtra("rating").length() > 0){
-            rating = Double.parseDouble(intent.getStringExtra("rating"));
-        }
-
-        point = new Point(id,name,address,task,tags, rating);
+        point = initPointFromIntent(getIntent());
 
         //initialize these for use with clearing list of items on delete
         dbHelper = new DatabaseHelper(this);
@@ -71,15 +55,11 @@ public class ViewPointActivity extends AppCompatActivity {
                 findViewById(R.id.tv_current_rating)
         };
 
-        outputs[0].setText(name + " Details");
-        outputs[1].setText(address);
-        outputs[2].setText(task);
-        outputs[3].setText(tags);
-        outputs[4].setText(Double.toString(rating));
+        refreshOutputs();
 
         //manipulate the rating bar
         ratingBar = findViewById(R.id.ratingBar);
-        ratingBar.setRating((float) rating);
+        ratingBar.setRating((float) point.getRating());
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
@@ -90,8 +70,41 @@ public class ViewPointActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
 
+        System.out.println("---------------------------onResume");
+        point = dbHelper.getItem(point.getId());
+        refreshOutputs();
+        ratingBar.setRating((float) point.getRating());
+    }
 
+    private Point initPointFromIntent(Intent intent){
+        Double rating = 0.0;
+
+        if(intent.getStringExtra("rating") != null
+                && intent.getStringExtra("rating").length() > 0){
+            rating = Double.parseDouble(intent.getStringExtra("rating"));
+        }
+
+        return new Point(
+            Integer.parseInt(intent.getStringExtra("id")),
+            intent.getStringExtra("name"),
+            intent.getStringExtra("address"),
+            intent.getStringExtra("task"),
+            intent.getStringExtra("tags"),
+            rating
+        );
+    }
+
+    private void refreshOutputs(){
+        outputs[0].setText(point.getName() + " Details");
+        outputs[1].setText(point.getAddress());
+        outputs[2].setText(point.getTask());
+        outputs[3].setText(point.getTags());
+        outputs[4].setText(Double.toString(point.getRating()));
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -128,14 +141,19 @@ public class ViewPointActivity extends AppCompatActivity {
     }
 
     private void openSendWithTwitter() {
-        String twuri = "http://twitter.com/intent/tweet?text=Scavenger hunt point: "+ Uri.encode(name +", "+address+", "+task, "utf-8");
+        String twuri = "http://twitter.com/intent/tweet?text=Scavenger hunt point: "
+                + Uri.encode(point.getName()
+                +", " +point.getAddress()+", "
+                +point.getTask(), "utf-8");
+
         Intent i = new Intent(Intent.ACTION_VIEW);
         i.setData(Uri.parse(twuri));
         startActivity(i);
     }
 
     private void openMenuEdit(){
-        // todo: add an edit point activity
+        Intent intent = attachDataToIntent(new Intent(getApplicationContext(), UpdatePointActivity.class));
+        startActivity(intent);
     }
 
     private void openDelete(){
@@ -171,13 +189,7 @@ public class ViewPointActivity extends AppCompatActivity {
     }
 
     private void openShowLocation(){
-        Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
-        intent.putExtra("id", point.getId() + "");
-        intent.putExtra("name", point.getName() + "");
-        intent.putExtra("address", point.getAddress() + "");
-        intent.putExtra("task", point.getTask() + "");
-        intent.putExtra("tags", point.getTags() + "");
-        intent.putExtra("rating", point.getRating() + "");
+        Intent intent = attachDataToIntent(new Intent(getApplicationContext(), MapsActivity.class));
         startActivity(intent);
     }
 
@@ -185,11 +197,28 @@ public class ViewPointActivity extends AppCompatActivity {
         Intent i = new Intent(Intent.ACTION_SENDTO);
         i.setData(Uri.parse("mailto:"));
         i.putExtra(Intent.EXTRA_SUBJECT, "Sharing location");
-        String text = "Location name: "+name+"\nAddress: "+address+"\nID: "+id+"\nTask: "+task+"\nTags: "+tags+"\nRatings: "+ rating;
+        String text = "Location name: "+point.getName()+"\nAddress: "+point.getAddress()
+                +"\nID: "+point.getId()
+                +"\nTask: "+point.getTask()
+                +"\nTags: "+point.getTags()
+                +"\nRatings: "+ point.getRating();
+
         i.putExtra(Intent.EXTRA_TEXT, text);
         if(i.resolveActivity(getPackageManager())!= null){
             startActivity(i);
         }
+    }
+
+    private Intent attachDataToIntent(Intent intent){
+
+        intent.putExtra("id", point.getId() + "");
+        intent.putExtra("name", point.getName() + "");
+        intent.putExtra("address", point.getAddress() + "");
+        intent.putExtra("task", point.getTask() + "");
+        intent.putExtra("tags", point.getTags() + "");
+        intent.putExtra("rating", point.getRating() + "");
+
+        return intent;
     }
 
 }
