@@ -57,6 +57,14 @@ public class ViewTeamMemberActivity extends AppCompatActivity {
                 openUpdate(addTeamMemberToIntent(teammember));
             }
         });
+
+        Button btnEmailTeamMember = findViewById(R.id.btn_email_team_member);
+        btnEmailTeamMember.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSendWithEmail();
+            }
+        });
     }
 
     @Override
@@ -122,6 +130,16 @@ public class ViewTeamMemberActivity extends AppCompatActivity {
         builder.setMessage("Are you sure you want to delete this team member?")
                 .setPositiveButton("Delete teammember", diOnClick)
                 .setNegativeButton("No", diOnClick).show();
+    }
+
+    private void openSendWithEmail(){
+        Intent i = new Intent(Intent.ACTION_SENDTO);
+        i.setData(Uri.parse("mailto:"));
+        i.putExtra(Intent.EXTRA_SUBJECT, "You Scavenger Hunt Teammate Wants to Get in Touch With You");
+        i.putExtra(Intent.EXTRA_TEXT, "");
+        if(i.resolveActivity(getPackageManager())!= null){
+            startActivity(i);
+        }
     }
 
     @Override
