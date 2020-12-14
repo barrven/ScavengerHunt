@@ -45,6 +45,11 @@ public class TeamActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(adapter);
 
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
     }
 
 
@@ -60,6 +65,10 @@ public class TeamActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.menu_add_team_member:
                 openAddTeamMember();
+                return true;
+
+            case android.R.id.home:
+                finish();
                 return true;
 
             default:return super.onOptionsItemSelected(item);
