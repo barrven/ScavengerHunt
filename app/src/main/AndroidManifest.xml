@@ -33,6 +33,11 @@
             android:value="@string/google_maps_key" />
 
         <activity
+            android:name=".UpdateTeamMemberActivity"
+            android:parentActivityName=".TeamActivity"
+            tools:targetApi="jelly_bean" />
+
+        <activity
             android:name=".TeamActivity"
             android:parentActivityName=".MainActivity"
             tools:targetApi="jelly_bean" />

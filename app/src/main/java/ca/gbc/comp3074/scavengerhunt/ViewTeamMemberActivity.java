@@ -58,7 +58,7 @@ public class ViewTeamMemberActivity extends AppCompatActivity {
         btnEditTeamMember.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                openUpdate(addTeamMemberToIntent(teammember));
             }
         });
     }
@@ -73,6 +73,21 @@ public class ViewTeamMemberActivity extends AppCompatActivity {
         String sms = intent.getStringExtra("sms");
 
         return new TeamMember(id,name,email,phone,sms);
+    }
+
+    private Intent addTeamMemberToIntent(TeamMember teammember){
+        Intent intent = new Intent(getApplicationContext(), UpdateTeamMemberActivity.class);
+        intent.putExtra("id", teammember.getId() + "");
+        intent.putExtra("name", teammember.getName() + "");
+        intent.putExtra("email", teammember.getEmail() + "");
+        intent.putExtra("phone", teammember.getPhone() + "");
+        intent.putExtra("sms", teammember.getSms() + "");
+
+        return intent;
+    }
+
+    private void openUpdate(Intent intent){
+        startActivity(intent);
     }
 
     private void openDelete(){

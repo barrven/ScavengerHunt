@@ -17,13 +17,11 @@ public class AddTeamMemberActivity extends AppCompatActivity {
     private DatabaseHelper dbHelper = new DatabaseHelper(this);
     private List<TeamMember> teammembers = new ArrayList<>();
     private TeamMemberAdapter adapter = new TeamMemberAdapter(this, teammembers, dbHelper);
-    private Context context;
 
     private EditText etName;
     private EditText etEmail;
     private EditText etPhone;
     private EditText etSms;
-    private EditText etRating;
     private Button btnAddTeammember;
 
     private String name;
@@ -55,7 +53,8 @@ public class AddTeamMemberActivity extends AppCompatActivity {
 
                 Intent backToMain = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(backToMain);
-    }
+            }
+
         });
     }
 
